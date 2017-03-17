@@ -1,0 +1,13 @@
+$msg: mediumseagreen;
+
+div {
+	h1 {
+		border: 2px solid $msg; 
+		color: $msg;
+		display: inline-block;
+		font-size: 50px;
+		padding: 20px;
+		margin: 5px;
+		
+	}
+}
