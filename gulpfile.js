@@ -9,13 +9,18 @@ const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
 const historyApiFallback = require('connect-history-api-fallback');
 
 gulp.task('styles', () => {
-    return gulp.src('./src/styles/**/*.scss')
+    gulp.src('./src/styles/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('style.css'))
         .pipe(gulp.dest('./dist/styles'))
+        .pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: false
+        }))
         .pipe(reload({stream:true}));
 });
 

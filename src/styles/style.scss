@@ -1,13 +1,18 @@
-$msg: mediumseagreen;
+// Partials
+@import "partials/setup";
+@import "partials/typography";
 
+
+// Variables
+
+
+
+// Layout & Positioning
 div {
 	h1 {
-		border: 2px solid $msg; 
-		color: $msg;
-		display: inline-block;
-		font-size: 50px;
-		padding: 20px;
+		display: flex;
 		margin: 5px;
-		
+		padding: 20px;
+		transform: scale(.8);
 	}
 }

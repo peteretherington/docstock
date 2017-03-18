@@ -1,0 +1,12 @@
+// Variables
+$msg: mediumseagreen;
+
+
+// Typography
+div {
+	h1 {
+		border: 2px solid $msg;
+		color: $msg;
+		font-size: 50px;
+	}
+}
