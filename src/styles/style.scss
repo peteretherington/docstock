@@ -4,15 +4,40 @@
 
 
 // Variables
+$black: #000;
+$white: #FFF;
 
+// Global CSS
+body {
+	background: $white;
+	padding: 5px;
+}
 
 
 // Layout & Positioning
-div {
-	h1 {
-		display: flex;
-		margin: 5px;
-		padding: 20px;
-		transform: scale(.8);
+header, div.movie-single__poster {
+	margin: 5px;
+	padding: 20px;
+}
+
+h1.title {
+	margin: 0;
+}
+
+nav {
+	margin: 10px 0 0 0;
+}
+
+div.movie-catalogue {
+	width: 80%;
+	margin: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	div.movie-catalogue__movie {
+		width: 25%;
+		padding: 10px;
+		img {
+			width: 100%;
+		}
 	}
 }

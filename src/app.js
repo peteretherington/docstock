@@ -1,10 +1,25 @@
+// Require
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ajax } from 'jquery';
 import { Router, Route, browserHistory, Link } from 'react-router';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
+// Firebase
+var config = {
+	apiKey: "AIzaSyBOJhX0zU6yWn1rJkmTYHGHyCehPadt_R4",
+	authDomain: "doc-stock.firebaseapp.com",
+	databaseURL: "https://doc-stock.firebaseio.com",
+	storageBucket: "doc-stock.appspot.com",
+	messagingSenderId: "505626792795"
+};
+firebase.initializeApp(config);
+
+// The Movie DB API Key
 const apiKey = `f7f73863c7be588a60f461bdab97cff8`;
 
+// Documentary Details Component
 class DocDetails extends React.Component {
 	
 	constructor() {
@@ -21,11 +36,9 @@ class DocDetails extends React.Component {
 			<div>
 	            <div className='movie-single__poster'>
 	                <div className='movie-single__description'>
-	                    <header>
-	                        <h1>{this.state.movie.original_title}</h1>
-	                        <h2>{this.state.movie.tagline}</h2>
-	                        <p>{this.state.movie.overview}</p>
-	                    </header>
+                        <h2>{this.state.movie.original_title}</h2>
+                        <h3>{this.state.movie.tagline}</h3>
+                        <p>{this.state.movie.overview}</p>
 	                </div>
 	                <div className='movie-single__image'>
 	                    <img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} />
@@ -39,13 +52,14 @@ class DocDetails extends React.Component {
 		ajax({
             url: `https://api.themoviedb.org/3/movie/${this.props.params.movie_id}`,
             data: {
-                api_key: 'f012df5d63927931e82fe659a8aaa3ac',
-                language: 'en-US',
-                sort_by: 'popularity.desc',
-                include_adult: false,
-                include_video: false,
-                page: 1,
-                primary_release_year: 2016
+                api_key: apiKey,
+			    language: `en-US`,
+			    sort_by: `popularity.desc`,
+			    with_genres: 99,
+			    include_adult: `true`,
+			    include_video: `false`,
+			    page: `1`,
+			    primary_release_year: `2000`
             }
         })
         .then((movie) => {
@@ -54,9 +68,8 @@ class DocDetails extends React.Component {
 	}
 }
 
-
+// Results (Catalogue)
 const Catalogue = props => {
-
 	return (
 		<div className='movie-catalogue'>
 			{props.movies.map( (movie, i) => {
@@ -67,12 +80,12 @@ const Catalogue = props => {
 						</Link>
 					</div>
 				)
-			})};
+			})}
 		</div>
 	)
 } 
 
-
+// Main App
 class App extends React.Component {
 	
 	constructor() {
@@ -86,13 +99,9 @@ class App extends React.Component {
 		// console.log(this.state.movies);
 		return (
 			<div>
-				<header className='top-header'>
-					<h1>DocStock</h1>
-					<nav>
-						<Link to='/'>Catalogue</Link>
-					</nav>
-				</header>
+				<Header />
 				{this.props.children || <Catalogue movies={this.state.movies} />}
+				<Footer />
 			</div>
 		)
 	}

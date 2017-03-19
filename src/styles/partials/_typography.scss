@@ -1,12 +1,30 @@
 // Variables
-$msg: mediumseagreen;
+$white: #fff;
+$black: #000;
+$green: mediumseagreen;
+$blue: dodgerblue;
+
+
+// Global CSS
+* {
+	color: $black;
+}
 
 
 // Typography
-div {
-	h1 {
-		border: 2px solid $msg;
-		color: $msg;
-		font-size: 50px;
-	}
+header {
+	border: 2px solid $black;
+}
+
+h1.title {
+	color: $black;
+	font-size: 50px;
+}
+
+a {
+	color: $blue;
+}
+
+div.movie-catalogue, div.movie-single__poster {
+	border: 2px solid $black;
 }
