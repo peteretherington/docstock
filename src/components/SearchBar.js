@@ -1,39 +1,21 @@
 import React from 'react';
 
 export default class SearchBar extends React.Component {
-	
-	constructor() {
-		super();
-		this.state = {
-			query: [{
-				items: [],
-				keyword: "Bruce Lee",
-				year: 2000
-			}],
-			name: "",
-			item: ""
-		}
-		this.handleChange = this.handleChange.bind(this);
-	}
-
-	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-		console.log(e.target.value);
-	}
-
 	render() {
 		return (
 			<div>
-				<form action="">
-					<input type="text" id="keywordSearch" placeholder="search by title" onChange={this.handleChange}/>
-					<input type="text" id="yearSearch" placeholder="search by year" onChange={this.handleChange}/>
-					<select name="sortBy" id="">
-						<option value="sortByRlse">Release Date</option>
-						<option value="sortByPop">Popularity</option>
-						<option value="sortByRate">Rating</option>
+				<form onSubmit={this.props.search}>
+					<input type="text" name="query" onChange={this.props.trackSearch} id="query" placeholder="search by title" />
+					<span>or</span>
+					<input type="text" name="primary_release_year" onChange={this.props.trackSearch} id="primary_release_year" placeholder="search by year" />
+					<select name="sort_by" onChange={this.props.trackSearch}>
+						<option value="">Sort By...</option>
+						<option value="popularity.desc">Popularity (default)</option>
+						<option value="primary_release_date.asc">Release Date</option>
+						<option value="vote_average.desc">Rating</option>
+						<option value="title.asc">Title (A-Z)</option>
 					</select>
+					<input type="submit" value="Search"/>
 				</form>
 			</div>
 		)
