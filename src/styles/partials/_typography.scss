@@ -1,30 +1,104 @@
 // Variables
+$cabin: Cabin, sans-serif;
 $white: #fff;
 $black: #000;
-$green: mediumseagreen;
-$blue: dodgerblue;
+$grey: rgb(160,160,160);
+$blue: rgb(2,122,180);
+$darkblue: rgb(2,35,100);
+$green: #00985a;
+$darkgreen: #004f2f;
 
 
 // Global CSS
 * {
 	color: $black;
+	font-family: $cabin;
 }
 
+@mixin box-shadow(){
+	-webkit-box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
+	-moz-box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
+	box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
+}
 
 // Typography
+#header-wrapper {
+	background: $white;
+}
+
 header {
-	border: 2px solid $black;
+	background: $white;
+	@include box-shadow();
+	h1.title {
+		background: $green;
+		color: $white;
+		font-size: 50px;
+		text-decoration: overline;
+	}
+	a {
+		color: $green;
+	}
+	nav {
+		ul {
+			list-style-type: none;
+		}
+	}
 }
 
-h1.title {
-	color: $black;
-	font-size: 50px;
+form.user-form {
+	background: $blue;
+	label {
+		color: $white;
+	}
+	button {
+		color: $white;
+		background: $green;
+		&:hover {
+			border: 2px outset $darkgreen;
+		}
+	}
 }
 
-a {
-	color: $blue;
+form#search-form {
+	// @include box-shadow();
+	input {
+		background: $white;
+		color: $grey;
+	}
+	span.or {
+		color: $grey;
+		font-style: italic;
+		text-decoration: underline;
+		transform: translateY(10%);
+	}
 }
 
-div.movie-catalogue, div.movie-single__poster {
-	border: 2px solid $black;
+div.movie-catalogue__movie img {
+	@include box-shadow();
+}
+
+div#no-results {
+	@include box-shadow();
+	font-size: 20px;
+	font-style: italic;
+	p {
+		color: $grey;
+	}
+}
+
+footer {
+	@include box-shadow();
+	p {
+		background: $green;
+		color: $darkgreen;
+		font-size: 20px;
+		a {
+			color: $darkgreen;
+			transition: all .5s;
+			&:hover {
+				color:$white;
+				text-decoration: none;
+			}
+		}
+	}
 }

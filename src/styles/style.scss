@@ -3,33 +3,83 @@
 @import "partials/typography";
 
 
-// Variables
-$black: #000;
-$white: #FFF;
-
 // Global CSS
-body {
-	background: $white;
-	padding: 5px;
-}
-
-
-// Layout & Positioning
-header, div.movie-single__poster {
-	margin: 5px;
-	padding: 20px;
-}
-
-h1.title {
+@mixin mainEl() {
+	padding: 10px;
 	margin: 0;
 }
 
-nav {
-	margin: 10px 0 0 0;
+// Layout & Positioning
+#header-wrapper, #catalogue-wrapper, #search-wrapper, #footer-wrapper {
+	@include mainEl();
+}
+
+header {
+	h1.title {
+		padding: 20px;
+		margin: 0;
+	}
+	nav {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 20px;
+		margin: 10px 0 0 0;
+		ul {
+			display: flex;
+			justify-content: center;
+			padding: 0;
+			margin: 0;
+		}
+		ul li {
+			margin: 0 10px;
+		}
+	}
+}
+
+form.user-form {
+	padding: 80px;
+	position: fixed;
+	top: 20%;
+	left: 35%;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	div {
+		display: flex;
+		flex-direction: column;
+		margin: 0 0 20px 0;
+		input {
+			margin: 2px 0 0 0;
+			padding: 5px 10px;
+		}
+	}
+	button {
+		margin: 20px 0;
+	}
+}
+
+
+form#search-form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	padding: 10px;
+	input {
+		margin: 0 10px;
+		padding: 5px 10px;
+		border-radius: 10px;
+	}
+	select {
+		padding: 5px 10px;
+	}
+	span.or {
+		padding: 8px 0;
+		margin: 0 10px;
+	}
 }
 
 div.movie-catalogue {
-	width: 80%;
+	width: 70%;
 	margin: 5px;
 	display: flex;
 	flex-wrap: wrap;
@@ -39,5 +89,25 @@ div.movie-catalogue {
 		img {
 			width: 100%;
 		}
+	}
+}
+
+div.movie-single__poster {
+	margin: 5px;
+	padding: 20px;
+}
+
+div#no-results {
+	padding: 40px;
+	p {
+		margin: 0;
+	}
+}
+
+footer {
+	p {
+		padding: 20px;
+		margin: 0;
+		text-align: center;
 	}
 }
