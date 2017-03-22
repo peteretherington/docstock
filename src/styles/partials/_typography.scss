@@ -7,21 +7,21 @@ $blue: rgb(2,122,180);
 $darkblue: rgb(2,35,100);
 $green: #00985a;
 $darkgreen: #004f2f;
+$shadowgrey: rgba(60,60,60,0.5);
 
 
 // Global CSS
 * {
-	color: $black;
 	font-family: $cabin;
 }
 
 @mixin box-shadow(){
-	-webkit-box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
-	-moz-box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
-	box-shadow: 2px 2px 5px 2px rgba(60,60,60,0.5);
+	-webkit-box-shadow: 2px 2px 5px 2px $shadowgrey;
+	-moz-box-shadow: 2px 2px 5px 2px $shadowgrey;
+	box-shadow: 2px 2px 5px 2px $shadowgrey;
 }
 
-// Typography
+// Colours & Typography
 #header-wrapper {
 	background: $white;
 }
@@ -30,23 +30,44 @@ header {
 	background: $white;
 	@include box-shadow();
 	h1.title {
-		background: $green;
+		background: $blue;
 		color: $white;
 		font-size: 50px;
 		text-decoration: overline;
 	}
 	a {
+		color: $blue;
+	}
+}
+
+ul.user-options {
+	list-style-type: none;
+	li {
+		color: $blue;
+	}
+	span.user {
 		color: $green;
 	}
-	nav {
-		ul {
-			list-style-type: none;
+	li #logout-button {
+		background: none;
+		border: none;
+		color: $blue;
+		text-decoration: underline;
+		transition: all 0.2s;
+		&:hover {
+			color: $darkblue;
 		}
 	}
 }
 
 form.user-form {
+	@include box-shadow();
 	background: $blue;
+	h2.user-form__header {
+		background: $white;
+		color: $green;
+		font-size: 30px;
+	}
 	label {
 		color: $white;
 	}
@@ -86,6 +107,19 @@ div#no-results {
 	}
 }
 
+div#list-wrapper {
+	@include box-shadow();
+	h2.list-header{
+		background: $blue;
+		color: $white;
+		font-size: 20px;
+	}
+	ul.user-list {
+		background: $white;
+		color: $green;
+	}
+}
+
 footer {
 	@include box-shadow();
 	p {
@@ -94,6 +128,7 @@ footer {
 		font-size: 20px;
 		a {
 			color: $darkgreen;
+			text-decoration: underline;
 			transition: all .5s;
 			&:hover {
 				color:$white;

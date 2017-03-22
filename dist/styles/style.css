@@ -133,7 +133,6 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   box-sizing: border-box; }
 
 * {
-  color: #000;
   font-family: Cabin, sans-serif; }
 
 #header-wrapper {
@@ -145,17 +144,37 @@ header {
   -moz-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
   box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5); }
   header h1.title {
-    background: #00985a;
+    background: #027ab4;
     color: #fff;
     font-size: 50px;
     text-decoration: overline; }
   header a {
+    color: #027ab4; }
+
+ul.user-options {
+  list-style-type: none; }
+  ul.user-options li {
+    color: #027ab4; }
+  ul.user-options span.user {
     color: #00985a; }
-  header nav ul {
-    list-style-type: none; }
+  ul.user-options li #logout-button {
+    background: none;
+    border: none;
+    color: #027ab4;
+    text-decoration: underline;
+    transition: all 0.2s; }
+    ul.user-options li #logout-button:hover {
+      color: #022364; }
 
 form.user-form {
+  -webkit-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  -moz-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
   background: #027ab4; }
+  form.user-form h2.user-form__header {
+    background: #fff;
+    color: #00985a;
+    font-size: 30px; }
   form.user-form label {
     color: #fff; }
   form.user-form button {
@@ -188,6 +207,18 @@ div#no-results {
   div#no-results p {
     color: #a0a0a0; }
 
+div#list-wrapper {
+  -webkit-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  -moz-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5); }
+  div#list-wrapper h2.list-header {
+    background: #027ab4;
+    color: #fff;
+    font-size: 20px; }
+  div#list-wrapper ul.user-list {
+    background: #fff;
+    color: #00985a; }
+
 footer {
   -webkit-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
   -moz-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
@@ -198,6 +229,7 @@ footer {
     font-size: 20px; }
     footer p a {
       color: #004f2f;
+      text-decoration: underline;
       transition: all .5s; }
       footer p a:hover {
         color: #fff;
@@ -224,23 +256,43 @@ header nav {
   header nav ul li {
     margin: 0 10px; }
 
+ul.user-options {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0; }
+  ul.user-options li {
+    margin: 0 10px; }
+    ul.user-options li span.user {
+      padding-left: 5px; }
+  ul.user-options input#logout-button {
+    padding: 0; }
+
 form.user-form {
-  padding: 80px;
+  padding: 0;
   position: fixed;
   top: 20%;
   left: 35%;
   display: flex;
   flex-direction: column;
   margin: auto; }
+  form.user-form h2.user-form__header {
+    padding: 20px 40px;
+    margin: 0 0 40px 0; }
   form.user-form div {
     display: flex;
     flex-direction: column;
+    padding: 0 80px 0 80px;
     margin: 0 0 20px 0; }
     form.user-form div input {
       margin: 2px 0 0 0;
       padding: 5px 10px; }
+  form.user-form div:first-child {
+    padding: 0 80px 20px 80px; }
   form.user-form button {
-    margin: 20px 0; }
+    padding: 15px;
+    margin: 10px auto 40px auto;
+    width: 140px; }
 
 form#search-form {
   display: flex;
@@ -258,7 +310,8 @@ form#search-form {
     margin: 0 10px; }
 
 div.movie-catalogue {
-  width: 70%;
+  float: left;
+  width: calc(70% - 10px);
   margin: 5px;
   display: flex;
   flex-wrap: wrap; }
@@ -270,12 +323,36 @@ div.movie-catalogue {
 
 div.movie-single__poster {
   margin: 5px;
-  padding: 20px; }
+  padding: 0 20px 20px 20px; }
+  div.movie-single__poster h2, div.movie-single__poster h3, div.movie-single__poster p {
+    padding: 5px 10px 10px 10px;
+    margin: 0; }
+  div.movie-single__poster img {
+    width: 100%; }
 
 div#no-results {
   padding: 40px; }
   div#no-results p {
     margin: 0; }
+
+div#docdetails-wrapper {
+  float: left;
+  width: calc(70% - 10px);
+  margin: 5px; }
+  div#docdetails-wrapper button.fb-button {
+    padding: 10px;
+    margin: 10px 20px 20px 20px; }
+
+div#list-wrapper {
+  float: left;
+  width: calc(30% - 20px);
+  margin: 10px; }
+  div#list-wrapper h2.list-header {
+    padding: 10px 20px;
+    margin: 0; }
+
+div#footer-wrapper {
+  clear: both; }
 
 footer p {
   padding: 20px;

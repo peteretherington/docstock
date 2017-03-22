@@ -9,7 +9,8 @@ export default class Header extends React.Component {
 			formToShow: '',
 			email: '',
 			password: '',
-			confirm: ''
+			confirm: '',
+			loggedIn: false
 		};
 		this.formToShow = this.formToShow.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -40,7 +41,8 @@ export default class Header extends React.Component {
 					console.log(userData);
 				});
 			this.setState({
-				formToShow: ''
+				formToShow: '',
+				loggedIn: true
 			})
 		}
 		else {
@@ -55,7 +57,7 @@ export default class Header extends React.Component {
 			console.log(userData);
 			if (firebase.auth().currentUser !== null) {
 				this.setState({
-					formToShow: 'userOnline'
+					loggedIn: true
 				})
 			}
 		});
@@ -64,32 +66,49 @@ export default class Header extends React.Component {
 
 	logOut(e) {
 		e.preventDefault();
-		if (firebase.auth().currentUser !== null) {
-			firebase.auth().signOut();
-			this.setState({
-				formToShow: ''
-			})
-		}
+		firebase.auth().signOut();
+		this.setState({
+			formToShow: '',
+			loggedIn: false
+		})
+	}
+
+	componentDidMount() {
+		firebase.auth().onAuthStateChanged(user => {
+			if(user) {
+				this.setState({
+					formToShow: '',
+					loggedIn: true
+				})
+			}
+		})
 	}
 
 	render() {
-		let loginForm = '';
-		if (this.state.formToShow === 'signup') {
-			loginForm = (
-				<form onSubmit={this.signUp} className='user-form'>
-					<label htmlFor="email">Email: </label>
-					<input type="email" name="email" onChange={this.handleChange}/>
-					<label htmlFor="password">Password: </label>
-					<input type="password" name="password" onChange={this.handleChange}/>
-					<label htmlFor="confirm">Confirm Password:</label>
-					<input type="password" name="confirm" onChange={this.handleChange}/>
-					<button>Sign Up</button>
+		let loginOptions;
+		if (this.state.loggedIn === false) {
+			loginOptions = (
+				<ul className="user-options">
+					<li><a href="" className="signup" onClick={this.formToShow}>Sign Up</a></li>
+					<li><a href="" className="login" onClick={this.formToShow}>Log In</a></li>
+				</ul>
+			)
+		}
+		else if (this.state.loggedIn === true) {
+			loginOptions = (
+				<form onSubmit={this.logOut}>
+					<ul className="user-options">
+						<li>Welcome, <span className="user">{`${firebase.auth().currentUser.email}`}</span></li>
+						<li><input type="submit" id="logout-button" value="Log Out"/></li>
+					</ul>
 				</form>
 			)
 		}
-		else if (this.state.formToShow === 'login') {
+		let loginForm = '';
+		if (this.state.formToShow === 'signup') {
 			loginForm = (
-				<form onSubmit={this.logIn} className='user-form'>
+				<form onSubmit={this.signUp} className="user-form">
+					<h2 className="user-form__header">Sign Up</h2>
 					<div>
 						<label htmlFor="email">Email: </label>
 						<input type="email" name="email" onChange={this.handleChange} placeholder="example@domain.com"/>
@@ -98,14 +117,27 @@ export default class Header extends React.Component {
 						<label htmlFor="password">Password: </label>
 						<input type="password" name="password" onChange={this.handleChange} placeholder="minimum 6 characters"/>
 					</div>
-					<button>Log In</button>
+					<div>
+						<label htmlFor="confirm">Confirm Password:</label>
+						<input type="password" name="confirm" onChange={this.handleChange} placeholder="minimum 6 characters"/>
+					</div>
+					<button>Sign Up</button>
 				</form>
 			)
-		} else if (this.state.formToShow === 'user-online') {
+		}
+		else if (this.state.formToShow === 'login') {
 			loginForm = (
-				<form onSubmit={this.logOut} className='userForm'>
-					<span>{`${firebase.auth().currentUser.email}`}</span>
-					<button>Log Out</button>
+				<form onSubmit={this.logIn} className="user-form">
+					<h2 className="user-form__header">Log In</h2>
+					<div>
+						<label htmlFor="email">Email: </label>
+						<input type="email" name="email" onChange={this.handleChange} placeholder="example@domain.com"/>
+					</div>
+					<div>
+						<label htmlFor="password">Password: </label>
+						<input type="password" name="password" onChange={this.handleChange} placeholder="*********"/>
+					</div>
+					<button>Log In</button>
 				</form>
 			)
 		}
@@ -115,12 +147,9 @@ export default class Header extends React.Component {
 					<h1 className='title'>Docstock</h1>
 					<nav>
 						<Link to='/'>Catalogue</Link>
-						<ul>
-							<li><a href="" className="signup" onClick={this.formToShow}>Sign Up</a></li>
-							<li><a href="" className="login" onClick={this.formToShow}>Log In</a></li>
-						</ul>
+						{loginOptions}
+						{loginForm}
 					</nav>
-					{loginForm}
 				</header>
 			</div>
 		)

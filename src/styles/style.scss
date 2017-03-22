@@ -9,6 +9,11 @@
 	margin: 0;
 }
 
+@mixin docDetails() {
+	padding: 5px 10px 10px 10px;
+	margin: 0;
+}
+
 // Layout & Positioning
 #header-wrapper, #catalogue-wrapper, #search-wrapper, #footer-wrapper {
 	@include mainEl();
@@ -36,28 +41,53 @@ header {
 	}
 }
 
+ul.user-options {
+		display: flex;
+		justify-content: center;
+		padding: 0;
+		margin: 0;
+	li {
+		margin: 0 10px;
+		span.user {
+			padding-left: 5px;
+		}
+	}
+	input#logout-button {
+		padding: 0;
+	}
+}
+
 form.user-form {
-	padding: 80px;
+	padding: 0;
 	position: fixed;
 	top: 20%;
 	left: 35%;
 	display: flex;
 	flex-direction: column;
 	margin: auto;
+	h2.user-form__header {
+		padding: 20px 40px;
+		margin: 0 0 40px 0;
+	}
 	div {
 		display: flex;
 		flex-direction: column;
+		padding: 0 80px 0 80px;
 		margin: 0 0 20px 0;
 		input {
 			margin: 2px 0 0 0;
 			padding: 5px 10px;
 		}
 	}
+	div:first-child{
+		padding: 0 80px 20px 80px;
+	}
 	button {
-		margin: 20px 0;
+		padding: 15px;
+		margin: 10px auto 40px auto;
+		width: 140px;
 	}
 }
-
 
 form#search-form {
 	display: flex;
@@ -79,7 +109,8 @@ form#search-form {
 }
 
 div.movie-catalogue {
-	width: 70%;
+	float: left;
+	width: calc(70% - 10px);
 	margin: 5px;
 	display: flex;
 	flex-wrap: wrap;
@@ -94,7 +125,13 @@ div.movie-catalogue {
 
 div.movie-single__poster {
 	margin: 5px;
-	padding: 20px;
+	padding: 0 20px 20px 20px;
+	h2, h3, p {
+		@include docDetails();
+	}
+	img {
+		width: 100%;
+	}
 }
 
 div#no-results {
@@ -104,7 +141,32 @@ div#no-results {
 	}
 }
 
+div#docdetails-wrapper {
+	float: left;
+	width: calc(70% - 10px);
+	margin: 5px;
+	button.fb-button {
+		padding: 10px;
+		margin: 10px 20px 20px 20px;
+	}
+}
+
+div#list-wrapper {
+	float: left;
+	width: calc(30% - 20px);
+	margin: 10px;
+	h2.list-header{
+		padding: 10px 20px;
+		margin: 0;
+	}
+}
+
+div#footer-wrapper {
+	clear: both;
+}
+
 footer {
+	// clear: both;
 	p {
 		padding: 20px;
 		margin: 0;
