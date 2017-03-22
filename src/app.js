@@ -35,23 +35,17 @@ class DocDetails extends React.Component {
 			items: []
 		}
 		this.addItem = this.addItem.bind(this);
-		// this.removeItem = this.removeItem.bind(this);
 	}
 
 	addItem() {
 		const docItem = {
 			id: this.state.movie.id,
-			title: this.state.movie.original_title,
-			poster: this.state.movie.poster_path
+			title: this.state.movie.original_title
 		};
-		const dbRef = firebase.database().ref();
+		const userId = firebase.auth().currentUser.uid;
+		const dbRef = firebase.database().ref(`/users/${userId}/bookmarks`);
 		dbRef.push(docItem);
 	}
-
-	// removeItem(itemToRemove) {
-	// 	const dbRef = firebase.database().ref(itemToRemove);
-	// 	dbRef.remove();
-	// }
 
 	componentDidMount() {
 		ajax({
@@ -70,18 +64,23 @@ class DocDetails extends React.Component {
 			this.setState({movie})
 		});
 
-		const dbRef = firebase.database().ref();
-		dbRef.on('value', firebaseData => {
-			const itemsArray = [];
-			const itemsData = firebaseData.val();
-			for(let itemKey in itemsData) {
-				itemsData[itemKey].key = itemKey;
-				itemsArray.push( itemsData[itemKey] )
+		firebase.auth().onAuthStateChanged(user => {
+			if(user) {
+				const userId = firebase.auth().currentUser.uid;
+				const dbRef = firebase.database().ref(`/users/${user}/bookmarks`);
+				dbRef.on('value', firebaseData => {
+					const itemsArray = [];
+					const itemsData = firebaseData.val();
+					for(let itemKey in itemsData) {
+						itemsData[itemKey].key = itemKey;
+						itemsArray.push( itemsData[itemKey] )
+					}
+					this.setState({
+						items: itemsArray
+					})
+				})
 			}
-			this.setState({
-				items: itemsArray
-			});
-		});
+		})
 	}
 
 	render() {
@@ -91,13 +90,11 @@ class DocDetails extends React.Component {
 					<div className='movie-single__description'>
 						<h2>{this.state.movie.original_title}</h2>
 						<h3>{this.state.movie.tagline}</h3>
-						<p>Overview: {this.state.movie.overview}</p>
-						<p>Release: {this.state.movie.release_date}</p>
-						<p>Rating: {this.state.movie.vote_average}/10</p>
-						<p>Votes: {this.state.movie.vote_count}</p>
-						<button onClick={this.addItem} className="fb-button">Add Item</button>
-						{/*<button onClick={() => this.state.remove(this.state.items)} className="fb-button">Remove Item</button>*/}
-						{/*<button onClick={this.removeItem} className="fb-button">Remove Item</button>*/}
+						<p><span className="bold-details">Overview:</span> {this.state.movie.overview}</p>
+						<p><span className="bold-details">Release:</span> {this.state.movie.release_date}</p>
+						<p><span className="bold-details">Rating:</span> {this.state.movie.vote_average}/10</p>
+						<p><span className="bold-details">Votes:</span> {this.state.movie.vote_count}</p>
+						<button onClick={this.addItem} className="list-button">Bookmark</button>
 					</div>
 					<div className='movie-single__image'>
 						<img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} />

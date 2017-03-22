@@ -21,6 +21,12 @@ $shadowgrey: rgba(60,60,60,0.5);
 	box-shadow: 2px 2px 5px 2px $shadowgrey;
 }
 
+button.list-button {
+	color: $white;
+	background: $blue;
+	font-size: 15px;
+}
+
 // Colours & Typography
 #header-wrapper {
 	background: $white;
@@ -81,7 +87,6 @@ form.user-form {
 }
 
 form#search-form {
-	// @include box-shadow();
 	input {
 		background: $white;
 		color: $grey;
@@ -99,11 +104,25 @@ div.movie-catalogue__movie img {
 }
 
 div#no-results {
-	@include box-shadow();
 	font-size: 20px;
 	font-style: italic;
 	p {
 		color: $grey;
+	}
+}
+
+div.movie-single__poster {
+	h2 {
+		background: $green;
+		box-shadow: 0 1px 2px 0 $darkgreen;
+		color: $white;
+	}
+	span.bold-details {
+		font-size: 18px;
+		color: $green;
+	}
+	img {
+		@include box-shadow();
 	}
 }
 

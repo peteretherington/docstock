@@ -36,10 +36,7 @@ export default class Header extends React.Component {
 		e.preventDefault();
 		if(this.state.password === this.state.confirm) {
 			firebase.auth()
-				.createUserWithEmailAndPassword(this.state.email, this.state.password)
-				.then((userData) => {
-					console.log(userData);
-				});
+				.createUserWithEmailAndPassword(this.state.email, this.state.password);
 			this.setState({
 				formToShow: '',
 				loggedIn: true
@@ -52,16 +49,13 @@ export default class Header extends React.Component {
 
 	logIn(e) {
 		e.preventDefault();
-		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-		.then((userData) => {
-			console.log(userData);
-			if (firebase.auth().currentUser !== null) {
-				this.setState({
-					loggedIn: true
-				})
-			}
-		});
-
+		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
+		if (firebase.auth().currentUser !== null) {
+			this.setState({
+				loggedIn: true
+			})
+			alert('Logged In');
+		}
 	}
 
 	logOut(e) {
@@ -104,6 +98,7 @@ export default class Header extends React.Component {
 				</form>
 			)
 		}
+
 		let loginForm = '';
 		if (this.state.formToShow === 'signup') {
 			loginForm = (
@@ -141,6 +136,7 @@ export default class Header extends React.Component {
 				</form>
 			)
 		}
+		
 		return (
 			<div id="header-wrapper">
 				<header className='top-header'>

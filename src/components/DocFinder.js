@@ -111,7 +111,6 @@ export default class DocFinder extends React.Component {
 		})
 		.then(data => {
 				this.setState({movies: data.results});
-				// console.log(data.results);
 		});
 	}
 }

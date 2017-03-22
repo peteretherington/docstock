@@ -126,16 +126,22 @@ div.movie-catalogue {
 div.movie-single__poster {
 	margin: 5px;
 	padding: 0 20px 20px 20px;
-	h2, h3, p {
+	h2 {
+		padding: 5px 10px 10px 10px;
+		margin: 0 0 10px 0;
+	}
+	h3, p {
 		@include docDetails();
 	}
 	img {
 		width: 100%;
+		max-width: 500px;
 	}
 }
 
 div#no-results {
 	padding: 40px;
+	margin: auto;
 	p {
 		margin: 0;
 	}
@@ -145,7 +151,7 @@ div#docdetails-wrapper {
 	float: left;
 	width: calc(70% - 10px);
 	margin: 5px;
-	button.fb-button {
+	button.list-button {
 		padding: 10px;
 		margin: 10px 20px 20px 20px;
 	}
@@ -155,9 +161,23 @@ div#list-wrapper {
 	float: left;
 	width: calc(30% - 20px);
 	margin: 10px;
-	h2.list-header{
+	h2.list-header {
 		padding: 10px 20px;
 		margin: 0;
+	}
+	ul {
+		padding: 0 20px;
+	}
+	li.doc-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding: 5px 0;
+		margin: 5px 0;
+	}
+	button.list-button {
+		float: right;
+		margin-left: 15px;
 	}
 }
 
@@ -171,5 +191,103 @@ footer {
 		padding: 20px;
 		margin: 0;
 		text-align: center;
+	}
+}
+
+
+// ******************
+// MEDIA QUERIES ****
+// ******************
+@media (max-width: 800px) {
+	form#search-form {
+		input {
+			margin: 5px;
+		}
+		select {
+			margin: 10px;
+		}
+	}
+	div#list-wrapper {
+		ul {
+			padding: 0 5px;
+		}
+		button.list-button {
+			margin-left: 10px;
+		}
+	}
+}
+
+@media (max-width: 640px) {
+	div.movie-catalogue {
+		width: calc(100% - 10px);
+		display: flex;
+		flex-wrap: wrap;
+		div.movie-catalogue__movie {
+			width: 33%;
+			padding: 10px;
+			img {
+				width: 100%;
+			}
+		}
+	}
+	div#docdetails-wrapper {
+		width: calc(100% - 10px);
+		button.list-button {
+			padding: 10px;
+			margin: 10px 20px 20px 20px;
+		}
+	}
+	div#list-wrapper {
+		clear:both;
+		width: calc(100% - 20px);
+	}
+}
+
+@media (max-width: 475px) {
+
+	header {
+		nav {
+			flex-direction: column;
+			margin-top: 0;
+			a {
+				order: 10;
+				margin-top: 20px;
+			}
+		}
+	}
+
+	ul.user-options {
+		justify-content: space-between;
+		order: 1;
+		li {
+			margin: 10px 10px 10px 0;
+		}
+	}
+
+	form#search-form {
+		flex-direction: column;
+		margin: auto;
+		width: 80%;
+		min-width: 200px;
+		max-width: 300px;
+		span.or {
+			text-align: center;
+		}
+	}
+	div.movie-catalogue {
+		div.movie-catalogue__movie {
+			width: 50%;
+			padding: 10px;
+			img {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 380px) {
+	ul.user-options {
+		flex-direction: column;
+		justify-content: space-between;
 	}
 }
