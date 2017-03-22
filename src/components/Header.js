@@ -17,6 +17,7 @@ export default class Header extends React.Component {
 		this.signUp = this.signUp.bind(this);
 		this.logIn = this.logIn.bind(this);
 		this.logOut = this.logOut.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 	}
 
 	formToShow(e) {
@@ -64,6 +65,12 @@ export default class Header extends React.Component {
 		this.setState({
 			formToShow: '',
 			loggedIn: false
+		})
+	}
+
+	closeModal() {
+		this.setState({
+			formToShow: ''
 		})
 	}
 
@@ -116,7 +123,8 @@ export default class Header extends React.Component {
 						<label htmlFor="confirm">Confirm Password:</label>
 						<input type="password" name="confirm" onChange={this.handleChange} placeholder="minimum 6 characters"/>
 					</div>
-					<button>Sign Up</button>
+					<button className="submit">Sign Up</button>
+					<button onClick={this.closeModal} className="close-modal">Close</button>
 				</form>
 			)
 		}
@@ -132,7 +140,8 @@ export default class Header extends React.Component {
 						<label htmlFor="password">Password: </label>
 						<input type="password" name="password" onChange={this.handleChange} placeholder="*********"/>
 					</div>
-					<button>Log In</button>
+					<button className="submit">Log In</button>
+					<button onClick={this.closeModal} className="close-modal">Close</button>
 				</form>
 			)
 		}
