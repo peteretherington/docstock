@@ -84,20 +84,41 @@ class DocDetails extends React.Component {
 	}
 
 	render() {
+		let poster;
+		let img = this.state.movie.poster_path;
+		if (img !== null) {
+			poster = 
+				(
+					<div className='movie-single__image'>
+						<img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} />
+					</div>
+				);
+		} else {
+			poster = (
+				<div className='movie-single__image'>
+					<div className="brokenImage">
+						<h2 className="brokenImage__title">{`${this.state.movie.original_title}`}</h2>
+					</div>
+				</div>
+			)
+		}
+		console.log(poster);
 		return (
 			<div id="docdetails-wrapper">
 				<div className='movie-single__poster'>
 					<div className='movie-single__description'>
 						<h2>{this.state.movie.original_title}</h2>
-						<h3>{this.state.movie.tagline}</h3>
-						<p><span className="bold-details">Overview:</span> {this.state.movie.overview}</p>
-						<p><span className="bold-details">Release:</span> {this.state.movie.release_date}</p>
-						<p><span className="bold-details">Rating:</span> {this.state.movie.vote_average}/10</p>
-						<p><span className="bold-details">Votes:</span> {this.state.movie.vote_count}</p>
-						<button onClick={this.addItem} className="list-button">Bookmark</button>
-					</div>
-					<div className='movie-single__image'>
-						<img src={`http://image.tmdb.org/t/p/w500/${this.state.movie.poster_path}`} />
+						<div className='inner-wrapper'>
+							<div className='movie-single__content'>
+								<h3>{this.state.movie.tagline}</h3>
+								<p><span className="bold-details">Overview:</span> {this.state.movie.overview}</p>
+								<p><span className="bold-details">Release:</span> {this.state.movie.release_date}</p>
+								<p><span className="bold-details">Rating:</span> {this.state.movie.vote_average}/10</p>
+								<p><span className="bold-details">Votes:</span> {this.state.movie.vote_count}</p>
+								<button onClick={this.addItem} className="list-button">Bookmark</button>
+							</div>
+							{poster}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -112,9 +133,9 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header />
-				{this.props.children || <DocFinder />}
+				<Header path={this.props.location.pathname}/>
 				<UserLists />
+				{this.props.children || <DocFinder />}
 				<Footer />
 			</div>
 		)

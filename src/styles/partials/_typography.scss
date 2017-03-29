@@ -22,10 +22,38 @@ $shadowgrey: rgba(60,60,60,0.5);
 }
 
 button.list-button {
-	color: $white;
 	background: $blue;
+	border: none;
+	color: $white;
 	font-size: 15px;
+	&:hover {
+		background: $green;
+	}
 }
+
+a {
+	text-decoration: none;
+}
+
+div.brokenImage {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	border: 1px solid $blue;
+	color: $blue;
+	font-size: 15px;
+	text-align: center;
+	overflow: hidden;
+	h2 {
+		margin: auto;
+	}
+	h2.brokenImage__title {
+		margin: auto;
+		background: none;
+		color: $green;
+	}
+}
+
 
 // Colours & Typography
 #header-wrapper {
@@ -34,7 +62,6 @@ button.list-button {
 
 header {
 	background: $white;
-	@include box-shadow();
 	h1.title {
 		background: $blue;
 		color: $white;
@@ -49,20 +76,23 @@ header {
 ul.user-options {
 	list-style-type: none;
 	li {
-		color: $blue;
+		background: $blue;
+		a {
+			color: $white;
+		}
 	}
-	span.user {
-		color: $green;
+	li.welcome {
+		background: $white;
+		color: $blue;
+		span.user {
+			color: $green;
+		}
 	}
 	li #logout-button {
 		background: none;
 		border: none;
-		color: $blue;
-		text-decoration: underline;
+		color: $white;
 		transition: all 0.2s;
-		&:hover {
-			color: $darkblue;
-		}
 	}
 }
 
@@ -91,11 +121,16 @@ form#search-form {
 		background: $white;
 		color: $grey;
 	}
+	input[type=submit] {
+		background: $blue;
+		border: none;
+		color: $white;
+	}
 	span.or {
 		color: $grey;
 		font-style: italic;
 		text-decoration: underline;
-		transform: translateY(10%);
+		// transform: translateY(10%);
 	}
 }
 
@@ -114,7 +149,7 @@ div#no-results {
 div.movie-single__poster {
 	h2 {
 		background: $green;
-		box-shadow: 0 1px 2px 0 $darkgreen;
+		// box-shadow: 0 1px 2px 0 $darkgreen;
 		color: $white;
 	}
 	span.bold-details {
@@ -124,10 +159,12 @@ div.movie-single__poster {
 	img {
 		@include box-shadow();
 	}
+
 }
 
 div#list-wrapper {
 	@include box-shadow();
+	background: $white;
 	h2.list-header{
 		background: $blue;
 		color: $white;
@@ -136,11 +173,13 @@ div#list-wrapper {
 	ul.user-list {
 		background: $white;
 		color: $green;
+		li.doc-item {
+			border-top: 1px dotted $grey;
+		}
 	}
 }
 
 footer {
-	@include box-shadow();
 	p {
 		background: $green;
 		color: $darkgreen;

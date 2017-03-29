@@ -15,7 +15,7 @@ export default class SearchBar extends React.Component {
 						<option value="vote_average.desc">Rating</option>
 						<option value="title.asc">Title (A-Z)</option>
 					</select>
-					<input type="submit" value="🔍"/>
+					<input type="submit" value="SEARCH"/>
 				</form>
 			</div>
 		)

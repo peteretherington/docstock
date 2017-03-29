@@ -14,13 +14,26 @@ const Catalogue = props => {
 		<div id="catalogue-wrapper">
 			<div className='movie-catalogue'>
 				{props.movies.length !== 0 ? (props.movies.map((movie, i) => {
-					return (
-						<div key={`movie-${i}`} className='movie-catalogue__movie'>
-							<Link to={`/movie/${movie.id}`}>
-								<img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-							</Link>
-						</div>
-					)
+					let img = movie.poster_path;
+					if (img !== null) {
+						return (
+							<div key={`movie-${i}`} className='movie-catalogue__movie'>
+								<Link to={`/movie/${movie.id}`}>
+									<img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+								</Link>
+							</div>
+						)
+					} else {
+						return (
+							<div key={`movie-${i}`} className='movie-catalogue__movie'>
+								<Link to={`/movie/${movie.id}`}>
+									<div className="brokenImage">
+										<h2>{`${movie.original_title}`}</h2>
+									</div>
+								</Link>
+							</div>
+						)
+					}
 				})) : <div id="no-results"><p>No results match your search.</p><p>Please try a different search.</p></div>}
 			</div>
 		</div>
@@ -56,7 +69,7 @@ export default class DocFinder extends React.Component {
 		e.preventDefault();
 		if (this.state.query) {
 			ajax({
-				url: `http://api.themoviedb.org/3/search/movie`,
+				url: `https://api.themoviedb.org/3/search/movie`,
 				data: {
 					api_key: apiKey,
 					language: `en-US`,

@@ -99,7 +99,7 @@ export default class Header extends React.Component {
 			loginOptions = (
 				<form onSubmit={this.logOut}>
 					<ul className="user-options">
-						<li>Welcome, <span className="user">{`${firebase.auth().currentUser.email}`}</span></li>
+						<li className="welcome">Welcome, <span className="user">{`${firebase.auth().currentUser.email}`}</span></li>
 						<li><input type="submit" id="logout-button" value="Log Out"/></li>
 					</ul>
 				</form>
@@ -145,13 +145,14 @@ export default class Header extends React.Component {
 				</form>
 			)
 		}
-		
+
 		return (
 			<div id="header-wrapper">
 				<header className='top-header'>
 					<h1 className='title'>Docstock</h1>
 					<nav>
-						<Link to='/'>Catalogue</Link>
+						{this.props.path !== "/" ? <Link to='/'className='catalogue'>Catalogue</Link> : null}
+						
 						{loginOptions}
 						{loginForm}
 					</nav>

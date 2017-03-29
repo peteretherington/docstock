@@ -10,9 +10,15 @@
 }
 
 @mixin docDetails() {
-	padding: 5px 10px 10px 10px;
+	padding: 5px 40px 10px 10px;
 	margin: 0;
 }
+
+div.brokenImage {
+	width: 100%;
+	height: 100%;
+}
+
 
 // Layout & Positioning
 #header-wrapper, #catalogue-wrapper, #search-wrapper, #footer-wrapper {
@@ -38,6 +44,9 @@ header {
 		ul li {
 			margin: 0 10px;
 		}
+		a.catalogue {
+			padding: 5px 0 0 0;
+		}
 	}
 }
 
@@ -47,19 +56,28 @@ ul.user-options {
 		padding: 0;
 		margin: 0;
 	li {
+		padding: 5px;
 		margin: 0 10px;
+	}
+	li.welcome {
+		padding: 10px 10px 0 0;
 		span.user {
 			padding-left: 5px;
 		}
 	}
+	a.login, a.signup {
+		padding: 5px 15px;
+		width: 100%;
+	}
 	input#logout-button {
-		padding: 0;
+		padding: 5px;
 	}
 }
 
 form.user-form {
 	padding: 0;
 	position: fixed;
+	z-index: 2;
 	top: 20%;
 	left: 35%;
 	display: flex;
@@ -102,7 +120,6 @@ form#search-form {
 	input {
 		margin: 0 10px;
 		padding: 5px 10px;
-		border-radius: 10px;
 	}
 	select {
 		padding: 5px 10px;
@@ -136,12 +153,29 @@ div.movie-single__poster {
 		padding: 5px 10px 10px 10px;
 		margin: 0 0 10px 0;
 	}
-	h3, p {
-		@include docDetails();
-	}
-	img {
+	div.inner-wrapper {
+		display: flex;
+		justify-content: space-between;
 		width: 100%;
-		max-width: 500px;
+	}
+	div.movie-single__content {
+		@include docDetails();
+		width: 60%;
+		h3 {
+			margin-top: 0;
+		}
+		button.list-button {
+			padding: 10px;
+			margin: 10px 20px 20px 0px;
+		}
+	}
+	div.movie-single__image {
+		width: 40%;
+		img {
+			float: right;
+			width: 100%;
+			max-width: 400px;
+		}
 	}
 }
 
@@ -157,13 +191,11 @@ div#docdetails-wrapper {
 	float: left;
 	width: calc(70% - 10px);
 	margin: 5px;
-	button.list-button {
-		padding: 10px;
-		margin: 10px 20px 20px 20px;
-	}
 }
 
 div#list-wrapper {
+	position: fixed;
+	right: 0;
 	float: left;
 	width: calc(30% - 20px);
 	margin: 10px;
@@ -217,10 +249,22 @@ footer {
 	}
 	div#list-wrapper {
 		ul {
-			padding: 0 5px;
+			padding: 0 5px 0 15px;
 		}
 		button.list-button {
 			margin-left: 10px;
+		}
+	}
+	div.inner-wrapper {
+		flex-direction: column;
+		div.movie-single__content {
+			width: 100%;
+		}
+		div.movie-single__image {
+			width: 100%;
+			img {
+				float: left;
+			}
 		}
 	}
 }
@@ -249,7 +293,8 @@ footer {
 		}
 	}
 	div#list-wrapper {
-		clear:both;
+		position: static;
+		clear: both;
 		width: calc(100% - 20px);
 	}
 }
@@ -263,6 +308,12 @@ footer {
 		div {
 			padding: 0 40px;
 		}
+	}
+	form#search-form {
+		margin: auto;
+	}
+	div#list-wrapper {
+		margin-bottom: 20px;
 	}
 }
 
@@ -278,14 +329,13 @@ footer {
 		}
 	}
 	form.user-form {
-		left: 10%;
+		left: 18%;
 		div {
 			padding: 0 20px;
 		}
 	}
 	ul.user-options {
-		justify-content: space-between;
-		order: 1;
+		justify-content: flex-start;
 		li {
 			margin: 10px 10px 10px 0;
 		}
@@ -293,8 +343,7 @@ footer {
 
 	form#search-form {
 		flex-direction: column;
-		margin: auto;
-		width: 80%;
+		width: 100%;
 		min-width: 200px;
 		max-width: 300px;
 		span.or {
@@ -312,9 +361,8 @@ footer {
 	}
 }
 
-@media (max-width: 380px) {
-	ul.user-options {
-		flex-direction: column;
-		justify-content: space-between;
-	}
-}
+// @media (max-width: 380px) {
+// 	ul.user-options {
+// 		flex-direction: column;
+// 	}
+// }

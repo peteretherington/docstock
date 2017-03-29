@@ -5,7 +5,7 @@ export default class Footer extends React.Component {
 		return (
 			<div id="footer-wrapper">
 				<footer>
-					<p>&copy; 2017 <a href="https://github.com/peteretherington/">Peter Etherington</a></p>
+					<p>&copy; 2017 <a href="http://peteretherington.com/">Peter Etherington</a></p>
 				</footer>
 			</div>
 		)
