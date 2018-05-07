@@ -39,11 +39,11 @@ div.brokenImage {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	border: 1px solid $blue;
 	color: $blue;
 	font-size: 15px;
 	text-align: center;
 	overflow: hidden;
+	@include box-shadow();
 	h2 {
 		margin: auto;
 	}
@@ -149,10 +149,17 @@ div#no-results {
 div.movie-single__poster {
 	h2 {
 		background: $green;
-		// box-shadow: 0 1px 2px 0 $darkgreen;
 		color: $white;
 	}
-	span.bold-details {
+	h3 {
+		padding: 0 0 10px;
+		margin: 0;
+	}
+	p {
+		padding: 10px 0;
+		margin: 0;
+	}
+	span {
 		font-size: 18px;
 		color: $green;
 	}
@@ -171,9 +178,11 @@ div#list-wrapper {
 		font-size: 20px;
 	}
 	ul.user-list {
+		list-style: none;
+		padding: 0 20px;
 		background: $white;
 		color: $green;
-		li.doc-item {
+		li.doc-item:not(:first-child) {
 			border-top: 1px dotted $grey;
 		}
 	}

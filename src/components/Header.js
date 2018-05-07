@@ -44,28 +44,34 @@ export default class Header extends React.Component {
 			})
 		}
 		else {
-			alert('Passwords do not match!');
+			alert("The second password does NOT match the first.");
 		}
 	}
 
 	logIn(e) {
 		e.preventDefault();
-		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password);
-		if (firebase.auth().currentUser !== null) {
-			this.setState({
-				loggedIn: true
-			})
-			alert('Logged In');
+		if (firebase.auth().currentUser === null) {
+			firebase.auth()
+				.signInWithEmailAndPassword(this.state.email, this.state.password)
+				.then((res) => {
+					this.setState({
+						loggedIn: true
+					})
+				})
+				.catch((err) => {
+					alert(err);
+				});
 		}
 	}
 
 	logOut(e) {
 		e.preventDefault();
-		firebase.auth().signOut();
-		this.setState({
-			formToShow: '',
-			loggedIn: false
-		})
+		if (window.confirm("Confirm logout")) {
+			firebase.auth().signOut();
+			this.setState({
+				loggedIn: false
+			})
+		}
 	}
 
 	closeModal() {
@@ -151,8 +157,7 @@ export default class Header extends React.Component {
 				<header className='top-header'>
 					<h1 className='title'>Docstock</h1>
 					<nav>
-						{this.props.path !== "/" ? <Link to='/'className='catalogue'>Catalogue</Link> : null}
-						
+						{this.props.path !== "/" ? <Link to='/' className='home'>Home</Link> : null}
 						{loginOptions}
 						{loginForm}
 					</nav>

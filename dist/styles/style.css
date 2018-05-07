@@ -150,11 +150,13 @@ div.brokenImage {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  border: 1px solid #027ab4;
   color: #027ab4;
   font-size: 15px;
   text-align: center;
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  -moz-box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5);
+  box-shadow: 2px 2px 5px 2px rgba(60, 60, 60, 0.5); }
   div.brokenImage h2 {
     margin: auto; }
   div.brokenImage h2.brokenImage__title {
@@ -238,7 +240,15 @@ div.movie-single__poster h2 {
   background: #00985a;
   color: #fff; }
 
-div.movie-single__poster span.bold-details {
+div.movie-single__poster h3 {
+  padding: 0 0 10px;
+  margin: 0; }
+
+div.movie-single__poster p {
+  padding: 10px 0;
+  margin: 0; }
+
+div.movie-single__poster span {
   font-size: 18px;
   color: #00985a; }
 
@@ -257,9 +267,11 @@ div#list-wrapper {
     color: #fff;
     font-size: 20px; }
   div#list-wrapper ul.user-list {
+    list-style: none;
+    padding: 0 20px;
     background: #fff;
     color: #00985a; }
-    div#list-wrapper ul.user-list li.doc-item {
+    div#list-wrapper ul.user-list li.doc-item:not(:first-child) {
       border-top: 1px dotted #a0a0a0; }
 
 footer p {
@@ -275,8 +287,10 @@ footer p {
       text-decoration: none; }
 
 div.brokenImage {
+  background: black;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  padding: 10px; }
 
 #header-wrapper, #catalogue-wrapper, #search-wrapper, #footer-wrapper {
   padding: 10px;
@@ -298,8 +312,10 @@ header nav {
     margin: 0; }
   header nav ul li {
     margin: 0 10px; }
-  header nav a.catalogue {
+  header nav a.home {
     padding: 5px 0 0 0; }
+    header nav a.home:hover {
+      text-decoration: underline; }
 
 ul.user-options {
   display: flex;
@@ -375,7 +391,9 @@ div.movie-catalogue {
     width: 25%;
     padding: 10px; }
     div.movie-catalogue div.movie-catalogue__movie img {
-      width: 100%; }
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
 
 div.movie-single__poster {
   margin: 5px;

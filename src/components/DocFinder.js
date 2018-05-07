@@ -57,6 +57,24 @@ export default class DocFinder extends React.Component {
 		this.search = this.search.bind(this);
 	}
 
+	componentDidMount() {
+		ajax({
+			url: `https://api.themoviedb.org/3/discover/movie`,
+			data: {
+				api_key: apiKey,
+				language: `en-US`,
+				include_video: `false`,
+				page: `1`,
+				with_genres: 99,
+				primary_release_year: `2018`,
+				sort_by: `popularity.desc`
+			}
+		})
+		.then(data => {
+				this.setState({movies: data.results});
+		});
+	}
+
 	trackSearch(e) {
 		if (this.state.query != null) {
 			this.setState({
@@ -107,23 +125,5 @@ export default class DocFinder extends React.Component {
 				{this.props.children || <Catalogue movies={this.state.movies} />}
 			</div>
 		)
-	}
-
-	componentDidMount() {
-		ajax({
-			url: `https://api.themoviedb.org/3/discover/movie`,
-			data: {
-				api_key: apiKey,
-				language: `en-US`,
-				include_video: `false`,
-				page: `1`,
-				with_genres: 99,
-				primary_release_year: `2016`,
-				sort_by: `popularity.desc`
-			}
-		})
-		.then(data => {
-				this.setState({movies: data.results});
-		});
 	}
 }

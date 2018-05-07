@@ -15,8 +15,10 @@
 }
 
 div.brokenImage {
+	background: black;
 	width: 100%;
 	height: 100%;
+	padding: 10px;
 }
 
 
@@ -44,8 +46,11 @@ header {
 		ul li {
 			margin: 0 10px;
 		}
-		a.catalogue {
+		a.home {
 			padding: 5px 0 0 0;
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 }
@@ -142,6 +147,8 @@ div.movie-catalogue {
 		padding: 10px;
 		img {
 			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	}
 }

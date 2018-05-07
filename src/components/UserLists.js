@@ -11,26 +11,20 @@ export default class UserLists extends React.Component {
 		}
 	}
 
-	removeItem(itemToRemove) {
-		const userId = firebase.auth().currentUser.uid;
-		const dbRef = firebase.database().ref(`users/${userId}/bookmarks/${itemToRemove}`);
-		dbRef.remove();
-	}
-
 	componentDidMount() {
-		firebase.auth().onAuthStateChanged(user => {
+		firebase.auth().onAuthStateChanged((user)=>{
 			if(user) {
-				const userId = firebase.auth().currentUser.uid;
-				const dbRef = firebase.database().ref(`/users/${userId}/bookmarks`);
-				dbRef.on('value', firebaseData => {
-					const itemsArray = [];
-					const itemsData = firebaseData.val();
-					for(let itemKey in itemsData) {
-						itemsData[itemKey].key = itemKey;
-						itemsArray.push(itemsData[itemKey])
+				const user = firebase.auth().currentUser;
+				const dbRef = firebase.database().ref(`/users/${user.uid}/bookmarks`);
+				dbRef.on('value', (res) => {
+					const dataArray = [];
+					const userData = res.val(); // Store the data
+					for(let key in userData) {
+						userData[key].key = key; // Store the object ID inside of itself
+						dataArray.push(userData[key]) // Push the object into an array
 					}
 					this.setState({
-						items: itemsArray
+						items: dataArray
 					});
 				});
 				this.setState({
@@ -46,16 +40,17 @@ export default class UserLists extends React.Component {
 		});
 	}
 
+	removeItem(bookmarkID) {
+		if (window.confirm("Are you sure you want to REMOVE this bookmark?")) {
+			const user = firebase.auth().currentUser;
+			const dbRef = firebase.database().ref(`users/${user.uid}/bookmarks/${bookmarkID}`);
+			dbRef.remove();
+		}
+	}
+
 	render() {
 		let userList;
-		if (this.state.loggedIn === false) {
-			userList = (
-				<ul className="user-list">
-					<li><span className="bold-details">Sign in</span> to start bookmarking!</li>
-				</ul>
-			)
-		}
-		if (this.state.loggedIn === true) {
+		if (this.state.loggedIn) {
 			userList = (
 				<ul className="user-list">
 					{this.state.items.length !== 0 ? (this.state.items.map(item => {
@@ -63,13 +58,18 @@ export default class UserLists extends React.Component {
 					})) : <li>Start bookmarking!</li>}
 				</ul>
 			)
+			
+		} else {
+			userList = (
+				<ul className="user-list">
+					<li><span className="bold-details">Sign in</span> to start bookmarking!</li>
+				</ul>
+			)
 		}
 		return (
 			<div id="list-wrapper">
 				<h2 className="list-header">Bookmarks</h2>
-				<ul className="user-list">
 					{userList}
-				</ul>
 			</div>
 		)
 	}

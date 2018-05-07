@@ -37,16 +37,6 @@ class DocDetails extends React.Component {
 		this.addItem = this.addItem.bind(this);
 	}
 
-	addItem() {
-		const docItem = {
-			id: this.state.movie.id,
-			title: this.state.movie.original_title
-		};
-		const userId = firebase.auth().currentUser.uid;
-		const dbRef = firebase.database().ref(`/users/${userId}/bookmarks`);
-		dbRef.push(docItem);
-	}
-
 	componentDidMount() {
 		ajax({
 			url: `https://api.themoviedb.org/3/movie/${this.props.params.movie_id}`,
@@ -56,31 +46,51 @@ class DocDetails extends React.Component {
 				with_genres: 99,
 				include_video: `false`,
 				page: `1`,
-				primary_release_year: `2016`,
+				primary_release_year: `2018`,
 				sort_by: `popularity.desc`
 			}
 		})
 		.then(movie => {
 			this.setState({movie})
 		});
-
 		firebase.auth().onAuthStateChanged(user => {
 			if(user) {
-				const userId = firebase.auth().currentUser.uid;
-				const dbRef = firebase.database().ref(`/users/${user}/bookmarks`);
-				dbRef.on('value', firebaseData => {
-					const itemsArray = [];
-					const itemsData = firebaseData.val();
-					for(let itemKey in itemsData) {
-						itemsData[itemKey].key = itemKey;
-						itemsArray.push( itemsData[itemKey] )
+				const user = firebase.auth().currentUser;
+				const dbRef = firebase.database().ref(`/users/${user.uid}/bookmarks`);
+				dbRef.on('value', res => {
+					const dataArray = [];
+					const userData = res.val();
+					for(let key in userData) {
+						userData[key].key = key;
+						dataArray.push( userData[key] )
 					}
 					this.setState({
-						items: itemsArray
+						items: dataArray
 					})
 				})
 			}
 		})
+	}
+
+	addItem() {
+		let duplicate = false;
+		let list = this.state.items;
+		for(let i=0; i<list.length; i++){
+			if(list[i].id===this.state.movie.id){
+				duplicate = true;
+			}
+		}
+		if (duplicate === false){
+			const docItem = {
+				id: this.state.movie.id,
+				title: this.state.movie.original_title
+			};
+			const user = firebase.auth().currentUser;
+			const dbRef = firebase.database().ref(`/users/${user.uid}/bookmarks`);
+			dbRef.push(docItem);
+		} else {
+			window.alert('That bookmark already exists!');
+		}
 	}
 
 	render() {
@@ -102,7 +112,6 @@ class DocDetails extends React.Component {
 				</div>
 			)
 		}
-		console.log(poster);
 		return (
 			<div id="docdetails-wrapper">
 				<div className='movie-single__poster'>
@@ -111,10 +120,10 @@ class DocDetails extends React.Component {
 						<div className='inner-wrapper'>
 							<div className='movie-single__content'>
 								<h3>{this.state.movie.tagline}</h3>
-								<p><span className="bold-details">Overview:</span> {this.state.movie.overview}</p>
-								<p><span className="bold-details">Release:</span> {this.state.movie.release_date}</p>
-								<p><span className="bold-details">Rating:</span> {this.state.movie.vote_average}/10</p>
-								<p><span className="bold-details">Votes:</span> {this.state.movie.vote_count}</p>
+								<p><span>Overview:</span> {this.state.movie.overview}</p>
+								<p><span>Release:</span> {this.state.movie.release_date}</p>
+								<p><span>Rating:</span> {this.state.movie.vote_average}/10</p>
+								<p><span>Votes:</span> {this.state.movie.vote_count}</p>
 								<button onClick={this.addItem} className="list-button">Bookmark</button>
 							</div>
 							{poster}
