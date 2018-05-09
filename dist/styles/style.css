@@ -141,7 +141,7 @@ button.list-button {
   color: #fff;
   font-size: 15px; }
   button.list-button:hover {
-    background: #00985a; }
+    background: #d80000; }
 
 a {
   text-decoration: none; }
@@ -271,6 +271,13 @@ div#list-wrapper {
     padding: 0 20px;
     background: #fff;
     color: #00985a; }
+    div#list-wrapper ul.user-list a {
+      color: #022364; }
+    div#list-wrapper ul.user-list a:hover {
+      color: #027ab4; }
+    div#list-wrapper ul.user-list li {
+      margin: 0;
+      padding: .5rem 0; }
     div#list-wrapper ul.user-list li.doc-item:not(:first-child) {
       border-top: 1px dotted #a0a0a0; }
 

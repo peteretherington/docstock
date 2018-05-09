@@ -6,6 +6,7 @@ $grey: rgb(160,160,160);
 $blue: rgb(2,122,180);
 $darkblue: rgb(2,35,100);
 $green: #00985a;
+$red: #d80000;
 $darkgreen: #004f2f;
 $shadowgrey: rgba(60,60,60,0.5);
 
@@ -27,7 +28,7 @@ button.list-button {
 	color: $white;
 	font-size: 15px;
 	&:hover {
-		background: $green;
+		background: $red;
 	}
 }
 
@@ -130,7 +131,6 @@ form#search-form {
 		color: $grey;
 		font-style: italic;
 		text-decoration: underline;
-		// transform: translateY(10%);
 	}
 }
 
@@ -182,6 +182,16 @@ div#list-wrapper {
 		padding: 0 20px;
 		background: $white;
 		color: $green;
+		a {
+			color: $darkblue;
+		}
+		a:hover {
+			color: $blue;
+		}
+		li {
+			margin: 0;
+			padding: .5rem 0;
+		}
 		li.doc-item:not(:first-child) {
 			border-top: 1px dotted $grey;
 		}

@@ -89,7 +89,7 @@ class DocDetails extends React.Component {
 			const dbRef = firebase.database().ref(`/users/${user.uid}/bookmarks`);
 			dbRef.push(docItem);
 		} else {
-			window.alert('That bookmark already exists!');
+			window.alert('That bookmark already exists.');
 		}
 	}
 
